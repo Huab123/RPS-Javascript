@@ -2,11 +2,13 @@
 let r = "rock"
 let p = "paper"
 let s = "scissors"
+let score = [0, 0]
 
 
-function output(computer, human, result) {
+function output(computer, human, score ,result) {
     return `Computer chose  ${computer} , You chose ${human} 
-            \n Which means you ${result}` 
+            \n Which means you ${result} 
+            \n The score is now Computer ${score[0]}:${score[1]} Human`
 }
 
 // Choose computer's choice 
@@ -45,38 +47,47 @@ function getHumanChoice() {
     }
 }
 
+// Play 1 round of rps
 function playRound() {
     let computerChoice = getComputerChoice()
     let humanChoice = getHumanChoice()
     console.log(computerChoice, humanChoice)
     
-    switch (computerChoice === r) {
-        case (humanChoice === r):
-            return output(computerChoice, humanChoice, "tie!")
-        case (humanChoice === p):
-            return output(computerChoice, humanChoice, "won!")
-        case (humanChoice === s):
-            return output(computerChoice, humanChoice, "lost!")
+    // Check for tie
+    if (computerChoice === humanChoice) {
+        alert(output(computerChoice, humanChoice, score, "tie!"))
+        return 2
     }
     
-    switch (computerChoice === p) {
-        case (humanChoice === r):
-            return output(computerChoice, humanChoice, "lost!")
-        case (humanChoice === p):
-            return output(computerChoice, humanChoice, "tie!")
-        case (humanChoice === s):
-            return output(computerChoice, humanChoice, "won!")
+    // Check win conditions
+    if ((computerChoice === r && humanChoice === s) ||
+        (computerChoice === p && humanChoice === r) ||
+        (computerChoice === s && humanChoice === p)) {
+        score[0] += 1
+        alert(output(computerChoice, humanChoice, score, "lost!"))
+        return 1
     }
-
-    switch (computerChoice === s) {
-        case (humanChoice === r):
-            return output(computerChoice, humanChoice, "won!")
-        case (humanChoice === p):
-            return output(computerChoice, humanChoice, "lost!")
-        case (humanChoice === s):
-            return output(computerChoice, humanChoice, "tie!")
-    } 
+    
+    // Otherwise human wins
+    score[1] += 1
+    alert(output(computerChoice, humanChoice, score, "won!"))
+    return 0
 }
 
-let result = playRound()
-alert(result)
+// Multi round of rps
+function playGame(numRounds) {
+    // if return 2 play again for the tie
+    for (let x = 0; x < numRounds; x++){
+        let result = playRound()
+        if (result == 2) {
+            x--
+        }
+    }
+
+    alert(`Final Score was 
+            \n Computer ${score[0]}:${score[1]} Human`)
+
+}
+
+
+playGame(prompt("How many rounds would you like to play (Default:3)\n Ties will not count toward number of rounds"))
