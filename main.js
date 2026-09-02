@@ -4,11 +4,11 @@ let p = "paper"
 let s = "scissors"
 let score = [0, 0]
 
-
+// Create output
 function output(computer, human, score ,result) {
     return `Computer chose  ${computer} , You chose ${human} 
-            \n Which means you ${result} 
-            \n The score is now Computer ${score[0]}:${score[1]} Human`
+            \nWhich means you ${result} 
+            \nThe score is now Computer ${score[0]}:${score[1]} Human`
 }
 
 // Choose computer's choice 
@@ -29,8 +29,10 @@ function getComputerChoice() {
 function getHumanChoice() {
     while (true) {
         try {
-            let humanChoice = prompt("Rock, Paper, Scissors? ")
+            let humanChoice = prompt("Rock, Paper, Scissors? \n(0, 1, 2 respectively can also be input for ease of playing) ")
             humanChoice = humanChoice.toLowerCase().trim();
+
+            // Can input 0, 1 or 2 for rock, paper, or scissor respectively
             if (humanChoice === '0' || humanChoice === r) {
                 return r
             }
@@ -76,7 +78,7 @@ function playRound() {
 
 // Multi round of rps
 function playGame(numRounds) {
-    // if return 2 play again for the tie
+    // If return 2 play again for the tie
     for (let x = 0; x < numRounds; x++){
         let result = playRound()
         if (result == 2) {
@@ -85,9 +87,9 @@ function playGame(numRounds) {
     }
 
     alert(`Final Score was 
-            \n Computer ${score[0]}:${score[1]} Human`)
+            \nComputer ${score[0]}:${score[1]} Human`)
 
 }
 
 
-playGame(prompt("How many rounds would you like to play (Default:3)\n Ties will not count toward number of rounds"))
+playGame(prompt("How many rounds would you like to play (Default:3)\nTies will not count toward number of rounds"))
