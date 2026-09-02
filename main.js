@@ -4,6 +4,10 @@ let p = "paper"
 let s = "scissors"
 
 
+function output(computer, human, result) {
+    return `Computer chose  ${computer} , You chose ${human} 
+            \n Which means you ${result}` 
+}
 
 // Choose computer's choice 
 function getComputerChoice() {
@@ -48,29 +52,29 @@ function playRound() {
     
     switch (computerChoice === r) {
         case (humanChoice === r):
-            return "tie"
+            return output(computerChoice, humanChoice, "tie!")
         case (humanChoice === p):
-            return "won"
+            return output(computerChoice, humanChoice, "won!")
         case (humanChoice === s):
-            return "lost" 
+            return output(computerChoice, humanChoice, "lost!")
     }
     
     switch (computerChoice === p) {
         case (humanChoice === r):
-            return "lost"
+            return output(computerChoice, humanChoice, "lost!")
         case (humanChoice === p):
-            return "tie"
+            return output(computerChoice, humanChoice, "tie!")
         case (humanChoice === s):
-            return "won" 
+            return output(computerChoice, humanChoice, "won!")
     }
 
     switch (computerChoice === s) {
         case (humanChoice === r):
-            return "won"
+            return output(computerChoice, humanChoice, "won!")
         case (humanChoice === p):
-            return "lost"
+            return output(computerChoice, humanChoice, "lost!")
         case (humanChoice === s):
-            return "tie" 
+            return output(computerChoice, humanChoice, "tie!")
     } 
 }
 
